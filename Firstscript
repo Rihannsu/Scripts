@@ -1,0 +1,21 @@
+#!/bin/bash
+country=US
+state=California
+locality=SanRamon
+organization=Blackberry
+dir=/cygdrive/c/logs
+
+read -p "Enter name of domain":  domain
+echo "generating certificate for $domain"
+
+openssl req -new -newkey rsa:2048 -nodes -out $domain.csr -keyout $domain.key -subj "/C=$country/ST=$state/L=$locality/O=$organization/CN=$domain.athochosting.com"
+
+
+createDirectory() {
+        if [ ! -d $dir ]
+             then
+             mkdir -p $dir
+        fi
+}
+
+echo "$domain" >> /cygdrive/c/logs/completed.log
